@@ -1,7 +1,7 @@
 import { getAuthUserData } from "./authReducer";
 
 const SetInitialized = 'SetInitialized';
-
+//test gitHub v1
 //Initial state
 let initialState = {
     initialized: false,
