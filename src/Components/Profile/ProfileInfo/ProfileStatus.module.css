@@ -1,0 +1,8 @@
+.Status:hover {
+    cursor: pointer;
+}
+
+.Status {
+    color: whitesmoke;
+    text-shadow: 1px 1px blue;
+}

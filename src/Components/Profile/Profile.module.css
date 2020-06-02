@@ -1,0 +1,11 @@
+.content img {
+    width: 100%;
+    height: 300px;
+  }
+
+  @media (max-width: 550px) {
+    .content img {
+      height: 200px;
+    }
+  }
+  

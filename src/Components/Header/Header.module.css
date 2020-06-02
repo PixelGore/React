@@ -1,0 +1,46 @@
+.header {
+  grid-area: h;
+  background-color: rgb(34, 31, 31);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+ }
+ 
+ .logo img{
+  height: 3em;
+ }
+
+ .welcome {
+  color: white;
+  text-shadow: 2px 2px 4px blue;
+  font-size: 1.5em;
+  flex-grow: 1;
+ }
+
+ .loginBlock {
+  font-size: 1.5em;
+  color: white;
+  text-shadow: 2px 2px black;
+ }
+ .loginBlock button {
+  border-radius: 12px;
+  background-color: black;
+  color: white;
+  border: 1px solid gray;
+  margin: 5px;
+  cursor: pointer;
+ }
+
+
+ @media (max-width: 550px){
+  .loginBlock{
+    font-size: 1em;
+  }
+  .logo img {
+    height: 2em;
+  }
+  .welcome {
+    font-size: 1em;
+  }
+ }

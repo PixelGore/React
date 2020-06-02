@@ -1,0 +1,28 @@
+.postsBlock {
+    padding: 10px;
+    clear:left;
+}
+
+.posts {
+    margin-top: 2em;
+}
+
+.sendButton {
+    padding: 5px;
+    margin : 10px 0px -30px 50px;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+    display: inline-block;
+    border:none;
+}
+
+.textarea {
+    border-radius: 16px;
+    margin: 10px 0px 0px 0px;
+    text-align: center;
+    padding: 12px 0px 0px 0px;
+    background: black;
+    color: white;
+    resize: none;
+}

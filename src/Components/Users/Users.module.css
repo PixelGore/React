@@ -1,0 +1,30 @@
+.userPhoto img {
+  width : 10em;
+  border-radius: 50px;
+}
+.paginator {
+ margin-left: 30%;
+}
+.user {
+  margin: 5%;
+}
+.users {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media (max-width: 850px) {
+  .users {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .paginator{
+    margin: 0px;
+  }
+  .users {
+    display: block;
+    margin-left: 15%;
+  }
+}
