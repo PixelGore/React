@@ -1,9 +1,22 @@
+//Imports
 import { authAPI, securityAPI } from "../../api/api";
 import { stopSubmit } from "redux-form";
-
+//Actions
 const SetUserData = 'auth/SetUserData';
 const toggleIsFETCHING = 'toggleIsFetching';
 const GET_CAPTCHA_URL_SUCCESS = 'GET_CAPTCHA_URL_SUCCESS';
+
+//Action Creators
+export const setAuthUserData = (userId, email, login, isAuth) => ({
+    type: SetUserData, payload:
+        { userId, email, login, isAuth }
+});
+export const toggleIsFetching = (isFetching) => ({ type: toggleIsFETCHING, isFetching })
+
+
+export const getCaptchaUrlSuccess = (captchaUrl) => ({
+    type: GET_CAPTCHA_URL_SUCCESS, payload: { captchaUrl }
+});
 
 //Initial state
 let initialState = {
@@ -27,18 +40,6 @@ const authReducer = (state = initialState, action) => {
             return state;
     }
 }
-
-//Action Creators
-export const setAuthUserData = (userId, email, login, isAuth) => ({
-    type: SetUserData, payload:
-        { userId, email, login, isAuth }
-});
-export const toggleIsFetching = (isFetching) => ({ type: toggleIsFETCHING, isFetching })
-
-
-export const getCaptchaUrlSuccess = (captchaUrl) => ({
-    type: GET_CAPTCHA_URL_SUCCESS, payload: { captchaUrl }
-});
 
 //Thunks
 

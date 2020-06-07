@@ -1,6 +1,9 @@
+//Imports
 import { getAuthUserData } from "./authReducer";
-
+//Actions
 const SetInitialized = 'SetInitialized';
+//Action Creators
+export const setInitializedAC = () => ({ type: SetInitialized });
 
 //Initial state
 let initialState = {
@@ -18,9 +21,6 @@ const appReducer = (state = initialState, action) => {
             return state;
     }
 }
-
-//Action Creators
-export const setInitializedAC = () => ({ type: SetInitialized });
 
 //Thunks
 export const initializeApp = () => (dispatch) => {

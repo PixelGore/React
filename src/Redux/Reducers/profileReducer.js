@@ -1,12 +1,12 @@
-//All imports
+//Imports
 import { profileAPI } from "../../api/api";
 import { stopSubmit } from "redux-form";
-//Action Creators
+//Actions
 const addPost = 'ADD-POST';
 const setUserProfile = 'setUserProfile';
 const SET_STATUS = 'SET_STATUS';
 const Save_Photo = 'Save_Photo';
-//
+//Action Creators
 export const addPostActionCreator = (newPostText) => ({ type: addPost, newPostText });
 export const setUserProfileAC = (profile) => ({ type: setUserProfile, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });

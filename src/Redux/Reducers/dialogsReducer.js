@@ -1,4 +1,8 @@
+//Actions
 const addMessage = 'ADD-MESSAGE';
+
+//Action Creator
+export const sendMessageActionCreator = (newMessagesText) => ({ type: 'ADD-MESSAGE', newMessagesText });
 
 //Initial State
 let initialState = {
@@ -18,6 +22,7 @@ let initialState = {
         { id: 8, name: "Dem" },
     ],
 };
+
 //Reducer
 const dialogsReducer = (state = initialState, action) => {
 
@@ -34,9 +39,6 @@ const dialogsReducer = (state = initialState, action) => {
             return state;
     }
 }
-//Action Creator
-export const sendMessageActionCreator = (newMessagesText) => ({ type: 'ADD-MESSAGE', newMessagesText });
-
 
 //end.
 export default dialogsReducer;
