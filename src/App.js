@@ -6,7 +6,7 @@ import News from './Components/News/News';
 import Music from './Components/Music/Music';
 import Settings from './Components/Settings/Settings';
 import Login from './Components/Login/Login';
-import { Route, withRouter, Switch } from 'react-router-dom'
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom'
 import HeaderContainer from './Components/Header/HeaderContainer';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -20,7 +20,7 @@ const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileCo
 class App extends React.Component {
 
 
-  catchAllUnhandledRejections = (reason,promise) => {
+  catchAllUnhandledRejections = (reason, promise) => {
     alert("Some error occurred...")
   };
 
@@ -59,6 +59,8 @@ class App extends React.Component {
             <Route path='/Settings' render={() => <Settings />} />
 
             <Route path='/Login' render={() => <Login />} />
+
+            <Redirect from="/" to="/Profile" />
 
             <Route path='*' render={() => <div>404 Not Found</div>} />
           </Switch>

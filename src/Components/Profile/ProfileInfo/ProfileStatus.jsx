@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import s from'./ProfileStatus.module.css'
 
-const ProfileStatusHooks = (props) => {
+const ProfileStatus = (props) => {
 
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status)
@@ -27,7 +27,7 @@ const ProfileStatusHooks = (props) => {
         <div className={s.Status}>
             {!editMode &&
                 <div>
-                    <span onDoubleClick={toggleEditMode}>{props.status || "-----"}</span>
+                    <span onClick={toggleEditMode}>{props.status || "-----"}</span>
                 </div>
             }
             {editMode &&
@@ -40,4 +40,4 @@ const ProfileStatusHooks = (props) => {
 
 }
 
-export default ProfileStatusHooks;
+export default ProfileStatus;
