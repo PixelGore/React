@@ -3,14 +3,21 @@ import { getAuthUserData } from "./authReducer";
 //Actions
 const SetInitialized = 'SetInitialized';
 //Action Creators
-export const setInitializedAC = () => ({ type: SetInitialized });
+type setInitializedActionType = {
+    type: typeof SetInitialized
+}
+export const setInitializedAC = ():setInitializedActionType => ({ type: SetInitialized });
 
 //Initial state
-let initialState = {
+type InitialStateType = {
+    initialized: boolean
+}
+
+let initialState: InitialStateType = {
     initialized: false,
 };
 //Reducer
-const appReducer = (state = initialState, action) => {
+const appReducer = (state= initialState, action: any):InitialStateType => {
     switch (action.type) {
         case SetInitialized:
             return {
@@ -23,7 +30,7 @@ const appReducer = (state = initialState, action) => {
 }
 
 //Thunks
-export const initializeApp = () => (dispatch) => {
+export const initializeApp = () => (dispatch: any) => {
     let promise = dispatch(getAuthUserData());
     Promise.all([promise])
         .then(() => {
