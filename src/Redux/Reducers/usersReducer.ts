@@ -58,7 +58,7 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [] as Array<number>//array of users ids
+    followingInProgress: [] as Array<number>//Array of users ids
 };
 //Reducer
 const UsersReducer = (state = initialState, action:any):InitialStateType => {
@@ -128,5 +128,5 @@ export const unfollow = (userId:number) => {
     }
 }
 
-//end.
+//Export
 export default UsersReducer;

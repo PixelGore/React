@@ -50,7 +50,7 @@ class App extends React.Component {
 
             <Route path='/Profile/:userId?' render={() => <Suspense fallback={<div>Loading...</div>}> <ProfileContainer /></Suspense>} />
 
-            <Route path='/Users' render={() => <UsersContainer />} />
+            <Route path='/Users' render={() => <UsersContainer pageTitle={"Users"}/>} />
 
             <Route path='/News' render={() => <News />} />
 

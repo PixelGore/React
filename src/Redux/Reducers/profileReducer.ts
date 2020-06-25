@@ -108,5 +108,5 @@ export const saveProfile = (profile:ProfileType) => async (dispatch:any, getstat
     }
 }
 
-//end.
+//Export
 export default profileReducer;

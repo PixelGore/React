@@ -53,5 +53,5 @@ const dialogsReducer = (state = initialState, action:any):initialStateType => {
     }
 }
 
-//end.
+//Export
 export default dialogsReducer;

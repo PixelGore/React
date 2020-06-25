@@ -38,5 +38,5 @@ export const initializeApp = () => (dispatch: any) => {
         });
 }
 
-//end.
+//Export
 export default appReducer;

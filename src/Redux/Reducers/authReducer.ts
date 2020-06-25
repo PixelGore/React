@@ -96,5 +96,5 @@ export const getCapthcaUrl = () => async (dispatch: any) => {
 
 }
 
-//end.
+//Export
 export default authReducer;
