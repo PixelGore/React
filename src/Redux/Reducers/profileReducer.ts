@@ -1,4 +1,3 @@
-import { AppStateType } from './../reduxStore';
 //Imports
 import { profileAPI } from "../../api/api";
 import { stopSubmit } from "redux-form";

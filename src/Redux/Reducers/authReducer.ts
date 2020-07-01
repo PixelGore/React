@@ -1,5 +1,5 @@
 //Imports
-import { authAPI, securityAPI } from "../../api/api"
+import { authAPI, securityAPI, ResultCodesEnum, ResultCodeForCaptcha } from "../../api/api"
 import { stopSubmit } from "redux-form"
 import { Dispatch } from "redux"
 //Actions
@@ -63,22 +63,22 @@ const authReducer = (state = initialState, action: ActionsTypes): initialStateTy
 type DispatchType = Dispatch<ActionsTypes>
 //Authentication
 export const getAuthUserData = () => async (dispatch: DispatchType) => {
-    let response = await authAPI.GetAuth()
-    if (response.data.resultCode === 0) {
-        let { id, login, email } = response.data.data;
+    let meData = await authAPI.Me()
+    if (meData.resultCode === ResultCodesEnum.Success) {
+        let { id, login, email } = meData.data;
         dispatch(setAuthUserDataAC(id, email, login, true))
     }
 }
 
 export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
-    let response = await authAPI.Login(email, password, rememberMe, captcha)
-    if (response.data.resultCode === 0) {
+    let loginData = await authAPI.Login(email, password, rememberMe, captcha)
+    if (loginData.resultCode === ResultCodesEnum.Success) {
         dispatch(getAuthUserData())
     } else {
-        if (response.data.resultCode === 10) {
+        if (loginData.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
             dispatch(getCapthcaUrl())
         }
-        let message = response.data.messages.length > 0 ? response.data.messages[0] : "Ups we have some trouble("
+        let message = loginData.messages.length > 0 ? loginData.messages[0] : "Ups we have some trouble("
         dispatch(stopSubmit("login", { _error: message }))
     }
 }
