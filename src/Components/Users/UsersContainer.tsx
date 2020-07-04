@@ -9,7 +9,7 @@ import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetchin
 import { UserType } from '../../types/types';
 import { AppStateType } from '../../Redux/reduxStore';
 //Types
-type PropsType = MapDispatchPropsType & MapStatePropsType & OwnPropsType
+type PropsType = MapDispatchPropsType & MapStatePropsType
 type MapStatePropsType = {
     currentPage:number
     pageSize:number
@@ -23,9 +23,7 @@ type MapDispatchPropsType = {
     follow: (userId:number) => void
     unfollow: (userId:number) => void
 }
-type OwnPropsType = {
-    pageTitle:string
-}
+
 //UserContainer
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
@@ -40,7 +38,6 @@ class UsersContainer extends React.Component<PropsType> {
 
     render() {
         return <>
-            <h2>{this.props.pageTitle}</h2>
             {this.props.isFetching ? <PreLoader /> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize} currentPage={this.props.currentPage}
@@ -65,7 +62,7 @@ let MapStateToProps = (state:AppStateType):MapStatePropsType => {
 
 
 export default compose(
-    connect<MapStatePropsType,MapDispatchPropsType,OwnPropsType,AppStateType>(MapStateToProps,
+    connect<MapStatePropsType,MapDispatchPropsType,never,AppStateType>(MapStateToProps,
         { follow, unfollow,requestUsers }
     )
 )(UsersContainer);
