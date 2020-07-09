@@ -1,11 +1,10 @@
 import React from 'react';
 import s from './MyPosts.module.css'
 import Post from './Posts/Post';
-import { Field, reduxForm } from 'redux-form';
-import { required, maxLengthCreator } from '../../../utils/Validators/Validators';
-import { Textarea } from '../../Common/FormsControls/FormsControl';
+import { reduxForm } from 'redux-form';
+import { Textarea, createField } from '../../Common/FormsControls/FormsControl';
 
-const maxLength10 = maxLengthCreator(10);
+
 
 const MyPosts = React.memo(props => {
     let post = props.posts.map(p => <Post message={p.message} upvote={p.upvotes} downvote={p.downvotes} key={p.id} />)
@@ -31,10 +30,7 @@ const MyPosts = React.memo(props => {
 const PostForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit} >
-            <div>
-                <Field component={Textarea} name='newPostText' placeholder="What's new ?"
-                    validate={[required, maxLength10]} />
-            </div>
+            {createField("What's new ?", "newPostText", [], Textarea)}
             <div>
                 <button>Click</button>
             </div>

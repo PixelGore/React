@@ -1,6 +1,6 @@
 //Imports
 import { userAPI } from "../../api/api"
-import { updateObjectInArray } from "../../utils/object-helper"
+import { updateObjectInArray } from "../../Components/Common/utils/object-helper"
 import { UserType } from './../../types/types'
 import { AppStateType, InferActionstypes } from './../reduxStore'
 import { ThunkAction } from "redux-thunk"

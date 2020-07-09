@@ -2,7 +2,7 @@
 import React from 'react'
 import { reduxForm, InjectedFormProps } from 'redux-form'
 import { Input, createField } from '../Common/FormsControls/FormsControl'
-import { required } from '../../utils/Validators/Validators'
+import { required } from '../Common/utils/Validators/Validators'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../Redux/Reducers/authReducer'
@@ -26,7 +26,7 @@ const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
 
 
 //Login_Form
-const LoginForm: React.FC<InjectedFormProps<LoginFormType, LoginFormIProps> & LoginFormIProps> = ({ handleSubmit, error, captchaUrl }) => {
+const _LoginForm: React.FC<InjectedFormProps<LoginFormType, LoginFormIProps> & LoginFormIProps> = ({ handleSubmit, error, captchaUrl }) => {
 
     return (
         <form onSubmit={handleSubmit} >
@@ -61,7 +61,7 @@ type LoginFormValuesTypeKeys = keyof LoginFormType
 
 
 //Adding Redux-Form
-const LoginReduxForm = reduxForm<LoginFormType, LoginFormIProps>({ form: 'login' })(LoginForm)
+const LoginReduxForm = reduxForm<LoginFormType, LoginFormIProps>({ form: 'login' })(_LoginForm)
 
 
 //MapStateToPops
