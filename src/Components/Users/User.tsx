@@ -1,10 +1,14 @@
+//Imports
 import React from 'react';
 import userImage from '../../assets/Images/user.jpg';
 import s from './Users.module.css';
 import { NavLink } from 'react-router-dom';
+import { UserType } from '../../types/types';
 
-let User = ({user,followingInProgress,follow,unfollow,}) => {
-    return(
+
+//User Componet
+let User: React.FC<PropsType> = ({ user, followingInProgress, follow, unfollow, }) => {
+    return (
         <div className={s.user}>
             <span>
 
@@ -17,10 +21,10 @@ let User = ({user,followingInProgress,follow,unfollow,}) => {
                 <div>
                     {user.followed ?
                         <button disabled={followingInProgress.some(id => id === user.id)}
-                            onClick={() => {unfollow(user.id); }} >Unfollow</button>
+                            onClick={() => { unfollow(user.id); }} >Unfollow</button>
                         :
                         <button disabled={followingInProgress.some(id => id === user.id)}
-                            onClick={() => {follow(user.id); }}>Follow</button>}
+                            onClick={() => { follow(user.id); }}>Follow</button>}
                 </div>
             </span>
             <span>
@@ -35,5 +39,12 @@ let User = ({user,followingInProgress,follow,unfollow,}) => {
             </span>
         </div>)
 }
+type PropsType = {
+    user: UserType
+    followingInProgress: Array<number>
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
 
+//Export
 export default User;

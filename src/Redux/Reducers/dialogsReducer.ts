@@ -1,12 +1,14 @@
-//Actions
-const addMessage = 'ADD-MESSAGE';
+//Imports
+import { InferActionstypes } from "../reduxStore";
+
+
 //Action Creator
-export const sendMessageAC = (newMessagesText: string): sendMessageActionCreatorACType => ({ type: 'ADD-MESSAGE', newMessagesText });
-type sendMessageActionCreatorACType = {
-    type: typeof addMessage
-    newMessagesText: string
+export const actions = {
+  sendMessageAC : (newMessagesText: string) => ({ type: 'messagesPage/sendMESSAGE', newMessagesText }as const),
 }
-type ActionsTypes = sendMessageActionCreatorACType
+type ActionsTypes = InferActionstypes<typeof actions>
+
+
 //Initial State
 type DialogType = {
     id: number
@@ -19,32 +21,30 @@ type messageType = {
 
 let initialState = {
     messages: [
-        { id: 1, message: 'Du vet hvem er jeg ?' },
-        { id: 2, message: 'Jeg er Ivar den benløse !' },
-        { id: 3, message: 'Du kan ikke drepe meg !' },
+        { id: 1, message: 'Hello' },
+        { id: 2, message: 'Ça va ?' },
+        { id: 3, message: 'Du vet hvem er jeg ?' },
     ] as Array<messageType>,
     dialogs: [
-        { id: 1, name: "Jeg" },
-        { id: 2, name: "Deg" },
-        { id: 3, name: "Ham" },
-        { id: 4, name: "Henne" },
-        { id: 5, name: "Det" },
-        { id: 6, name: "Oss" },
-        { id: 7, name: "Dere" },
-        { id: 8, name: "Dem" },
+        { id: 1, name: "Alex" },
+        { id: 2, name: "John" },
+        { id: 3, name: "Alexa" },
+        { id: 4, name: "Siri" },
+        { id: 5, name: "Max" },
     ] as Array<DialogType>,
-};
-type initialStateType = typeof initialState
+}
+export type initialStateType = typeof initialState
+
 //Reducer
 const dialogsReducer = (state = initialState, action: ActionsTypes): initialStateType => {
 
 
     switch (action.type) {
-        case addMessage: {
-            let body = action.newMessagesText
+        case 'messagesPage/sendMESSAGE': {
+            let text = action.newMessagesText
             return {
                 ...state,
-                messages: [...state.messages, { id: 6, message: body }]
+                messages: [...state.messages, { id: 6, message: text }]
             }
         }
         default:

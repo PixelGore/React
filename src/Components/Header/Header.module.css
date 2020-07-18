@@ -4,64 +4,65 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content:space-between;
- }
- 
- .logo img{
+  justify-content: space-between;
+}
+
+.logo img {
   margin-left: 1.5em;
   height: 3.5em;
- }
+}
 
- .welcome {
+.welcome {
   color: white;
   text-shadow: 2px 2px 4px blue;
   font-size: 1.5em;
- }
+}
 
- .loginBlock {
+.loginBlock {
   font-size: 1.5em;
   color: white;
   text-shadow: 2px 2px black;
- }
- .loginBlock button {
+}
+
+.loginBlock button {
   border-radius: 12px;
   background-color: black;
   color: white;
   border: 1px solid gray;
   margin: 5px;
   cursor: pointer;
- }
+}
 
 
- @media (max-width: 700px){
-  .loginBlock{
+@media (max-width: 700px) {
+  .loginBlock {
     font-size: 1em;
   }
-  .logo img {
-    height: 2.5em;
+
+  .welcome {
+    font-size: 1.2em;
   }
+}
+
+@media (max-width:600px) {
   .welcome {
     font-size: 1em;
   }
- }
+}
 
- @media (max-width: 500px){
-  .logo img{
-    margin-left: 0;
-  }
-  .loginBlock{
-    font-size: 1em;
-  }
- }
-
- @media (max-width: 420px){
-   .welcome {
-     display:none;
-   }
-   .logo img{
-    height: 3.5em;
-   }
-   .loginBlock{
+@media (max-width: 500px) {
+  .loginBlock {
     font-size: 1.3em;
   }
- }
+
+  .welcome {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .logo img {
+    height: 3.5em;
+    margin-left: 0;
+  }
+}

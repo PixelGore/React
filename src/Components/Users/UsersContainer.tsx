@@ -1,28 +1,14 @@
 //Imports
-import React from 'react';
-import { connect } from 'react-redux';
-import { follow, unfollow, requestUsers } from '../../Redux/Reducers/usersReducer';
-import Users from './Users';
-import PreLoader from '../Common/Preloader/Preloader';
-import { compose } from 'redux';
-import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress } from '../../Redux/Selectors/userSelectors';
-import { UserType } from '../../types/types';
-import { AppStateType } from '../../Redux/reduxStore';
-//Types
-type PropsType = MapDispatchPropsType & MapStatePropsType
-type MapStatePropsType = {
-    currentPage:number
-    pageSize:number
-    isFetching:boolean
-    totalUsersCount:number
-    users:Array<UserType>
-    followingInProgress: Array<number>
-}
-type MapDispatchPropsType = {
-    requestUsers:(currentPage:number, pageSize:number)=>void
-    follow: (userId:number) => void
-    unfollow: (userId:number) => void
-}
+import React from 'react'
+import { connect } from 'react-redux'
+import { follow, unfollow, requestUsers } from '../../Redux/Reducers/usersReducer'
+import Users from './Users'
+import PreLoader from '../Common/Preloader/Preloader'
+import { compose } from 'redux'
+import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress } from '../../Redux/Selectors/userSelectors'
+import { UserType } from '../../types/types'
+import { AppStateType } from '../../Redux/reduxStore'
+
 
 //UserContainer
 class UsersContainer extends React.Component<PropsType> {
@@ -48,6 +34,9 @@ class UsersContainer extends React.Component<PropsType> {
         </>
     }
 }
+type PropsType = MapDispatchPropsType & MapStatePropsType
+
+
 //MSTP
 let MapStateToProps = (state:AppStateType):MapStatePropsType => {
     return {
@@ -59,10 +48,24 @@ let MapStateToProps = (state:AppStateType):MapStatePropsType => {
         followingInProgress: getFollowingInProgress(state),
     }
 }
+type MapStatePropsType = {
+    currentPage:number
+    pageSize:number
+    isFetching:boolean
+    totalUsersCount:number
+    users:Array<UserType>
+    followingInProgress: Array<number>
+}
+type MapDispatchPropsType = {
+    requestUsers:(currentPage:number, pageSize:number)=>void
+    follow: (userId:number) => void
+    unfollow: (userId:number) => void
+}
 
 
-export default compose(
+//Export
+export default compose<React.ComponentType>(
     connect<MapStatePropsType,MapDispatchPropsType,never,AppStateType>(MapStateToProps,
         { follow, unfollow,requestUsers }
     )
-)(UsersContainer);
+)(UsersContainer)

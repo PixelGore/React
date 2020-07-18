@@ -1,10 +1,12 @@
+//Imports
 import React from 'react';
 import s from './Header.module.css';
 import Logo from '../../assets/Images/Logo.svg'
 import { NavLink } from 'react-router-dom';
 
-const Header = (props) => {
 
+//Header Component
+const Header: React.FC<mapPropsType & DispatchPropsType> = (props) => {
   return (
     <header className={s.header}>
       <div className={s.logo} ><img src={Logo} alt='Logo' /></div>
@@ -20,5 +22,13 @@ const Header = (props) => {
     </header>
   )
 }
+export type mapPropsType = {
+  isAuth: boolean
+  login: string | null
+}
+export type DispatchPropsType = {
+  logout: () => void
+}
 
+//Export
 export default Header;

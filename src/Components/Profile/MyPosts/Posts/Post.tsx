@@ -1,8 +1,10 @@
+//Imports
 import React from 'react';
 import s from './Post.module.css'
 import userImage from '../../../../assets/Images/user.jpg'
 
-const Post = (props) => {
+//Post Component
+const Post:React.FC<PropsType> = (props) => {
     return (
         <div className={s.posts}>
             <div className={s.item}><img src={userImage} alt="PostImage" />{props.message}</div>
@@ -13,5 +15,12 @@ const Post = (props) => {
         </div>
     )
 }
+type PropsType = {
+    message:string
+    upvote:number
+    downvote:number
+}
 
+
+//Export
 export default Post;

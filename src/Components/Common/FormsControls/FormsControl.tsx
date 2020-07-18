@@ -2,7 +2,7 @@
 import React from 'react'
 import styles from './FormsControl.module.css'
 import { Field, WrappedFieldProps, WrappedFieldMetaProps } from 'redux-form'
-import { FieldValidatorType } from '../utils/Validators/Validators'
+import { FieldValidatorType } from '../Validators/Validators'
 
 
 //Fuction is able to create Fields [placeholder,name of field , name of the component,validators and the components writen below {Textarea,Input}]
@@ -30,7 +30,7 @@ export const Input: React.FC<WrappedFieldProps> = (props) => {
     return <FormControl {...props} ><input {...input} {...restProps} /></FormControl>
 }
 
-//The main component
+//The main component "FormControl"
 const FormControl: React.FC<FormControlPropsType> = ({ meta: { touched, error }, children }) => {
     const hasError = touched && error;
     return (

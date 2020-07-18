@@ -1,11 +1,11 @@
-import React from 'react';
+//Imports
+import React from 'react'
 import s from './../Dialogs.module.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
 
-
-
-const DialogsItem = (props) => {
+//DialogItem Component
+const DialogsItem: React.FC<PropsType> = (props) => {
 
     return (
         <div className={s.dialog + " " + s.active}>
@@ -13,5 +13,11 @@ const DialogsItem = (props) => {
         </div>
     )
 }
+type PropsType = {
+    id: number
+    name: string
+}
 
+
+//Export
 export default DialogsItem;

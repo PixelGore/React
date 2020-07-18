@@ -1,11 +1,11 @@
 .nav {
-    grid-area: n;
-    background-color: rgb(73, 65, 65);
+  grid-area: n;
+  background-color: rgb(73, 65, 65);
 }
 
 .item {
-       color : white;
-       padding: 10px;
+  color: white;
+  padding: 10px;
 }
 
 .item a {
@@ -16,6 +16,6 @@
 }
 
 .item a.activeLink {
-  text-shadow: 2px 2px 4px #c6dd85 ;
+  text-shadow: 2px 2px 4px #c6dd85;
   font-size: 1.5em;
 }

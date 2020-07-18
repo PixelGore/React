@@ -1,25 +1,26 @@
 //Imports
 import { getAuthUserData } from "./authReducer"
-//Actions
-const SetInitialized = 'SetInitialized'
-//Action Creators
-export const setInitializedAC = (): setInitializedActionType => ({ type: SetInitialized });
-type setInitializedActionType = {
-    type: typeof SetInitialized
-}
+import { InferActionstypes } from "../reduxStore"
 
-type ActionsTypes = setInitializedActionType
+
+//Actions
+const actions = {
+ setInitializedAC: () => ({ type: 'app/Set_Initialized' } as const)
+}
+type ActionsTypes = InferActionstypes<typeof actions>
+
+
 //Initial state
-let initialState: InitialStateType = {
+let initialState = {
     initialized: false,
 }
-type InitialStateType = {
-    initialized: boolean
-}
+type InitialStateType = typeof initialState
+
+
 //Reducer
 const appReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case SetInitialized:
+        case 'app/Set_Initialized':
             return {
                 ...state,
                 initialized: true
@@ -29,14 +30,16 @@ const appReducer = (state = initialState, action: ActionsTypes): InitialStateTyp
     }
 }
 
+
 //Thunks
 export const initializeApp = () => (dispatch: any) => {
     let promise = dispatch(getAuthUserData())
     Promise.all([promise])
         .then(() => {
-            dispatch(setInitializedAC())
+            dispatch(actions.setInitializedAC())
         });
 }
+
 
 //Export
 export default appReducer;

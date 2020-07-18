@@ -1,9 +1,8 @@
 //Imports
-import { userAPI } from "../../api/api"
+import { userAPI } from "../../api/userAPI"
 import { updateObjectInArray } from "../../Components/Common/utils/object-helper"
 import { UserType } from './../../types/types'
-import { AppStateType, InferActionstypes } from './../reduxStore'
-import { ThunkAction } from "redux-thunk"
+import { InferActionstypes, BaseThunkType } from './../reduxStore'
 import { Dispatch } from "redux"
 
 //ActionCreators
@@ -74,10 +73,9 @@ const UsersReducer = (state = initialState, action: ActionsTypes): InitialStateT
 
 
 //Thunks
-//Users
 type DispatchType = Dispatch<ActionsTypes>
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
-
+type ThunkType = BaseThunkType<ActionsTypes>
+//Users
 export const requestUsers = (page: number, pageSize: number): ThunkType => {
     return async (dispatch) => {
         dispatch(actions.toggleIsFetchingAC(true))
