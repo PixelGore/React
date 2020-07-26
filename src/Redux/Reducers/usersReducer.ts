@@ -4,6 +4,7 @@ import { updateObjectInArray } from "../../Components/Common/utils/object-helper
 import { UserType } from './../../types/types'
 import { InferActionstypes, BaseThunkType } from './../reduxStore'
 import { Dispatch } from "redux"
+import { APIResponseType } from "../../api/api"
 
 //ActionCreators
 export const actions = {
@@ -28,14 +29,14 @@ type ActionsTypes = InferActionstypes<typeof actions>
 
 let initialState = {
     users: [] as Array<UserType>,
-    pageSize: 12,
+    pageSize: 24,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
     followingInProgress: [] as Array<number>//Array of users ids
 }
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 //Reducer
 const UsersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
@@ -88,23 +89,23 @@ export const requestUsers = (page: number, pageSize: number): ThunkType => {
 }
 
 
-const _toggleFollowUnfollow = async (dispatch: DispatchType, userId: number, apiMethod: any, actionCreator:
+const _toggleFollowUnfollow = async (dispatch: DispatchType, userId: number, apiMethod: (userId: number) => Promise<APIResponseType>, actionCreator:
     (userId: number) => ActionsTypes) => {
     dispatch(actions.toggleFollowingProgressAC(true, userId))
     let response = await apiMethod(userId)
-    if (response.data.resultCode === 0) { dispatch(actionCreator(userId)) }
+    if (response.resultCode === 0) { dispatch(actionCreator(userId)) }
     dispatch(actions.toggleFollowingProgressAC(false, userId))
 }
 
 export const follow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _toggleFollowUnfollow(dispatch, userId, userAPI.follow.bind(userId), actions.followSuccessAC)
+        await _toggleFollowUnfollow(dispatch, userId, userAPI.follow.bind(userAPI), actions.followSuccessAC)
     }
 }
 
 export const unfollow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _toggleFollowUnfollow(dispatch, userId, userAPI.unfollow.bind(userId), actions.unfollowSuccessAC)
+        await _toggleFollowUnfollow(dispatch, userId, userAPI.unfollow.bind(userAPI), actions.unfollowSuccessAC)
     }
 }
 

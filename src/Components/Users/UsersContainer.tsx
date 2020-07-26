@@ -5,7 +5,7 @@ import { follow, unfollow, requestUsers } from '../../Redux/Reducers/usersReduce
 import Users from './Users'
 import PreLoader from '../Common/Preloader/Preloader'
 import { compose } from 'redux'
-import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress } from '../../Redux/Selectors/userSelectors'
+import { getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingInProgress } from '../../Redux/Selectors/userSelector'
 import { UserType } from '../../types/types'
 import { AppStateType } from '../../Redux/reduxStore'
 
@@ -17,8 +17,8 @@ class UsersContainer extends React.Component<PropsType> {
         this.props.requestUsers(currentPage, pageSize);
     }
 
-    onPageChange = (pageNumber:number) => {
-        const {pageSize} = this.props
+    onPageChange = (pageNumber: number) => {
+        const { pageSize } = this.props
         this.props.requestUsers(pageNumber, pageSize)
     }
 
@@ -38,7 +38,7 @@ type PropsType = MapDispatchPropsType & MapStatePropsType
 
 
 //MSTP
-let MapStateToProps = (state:AppStateType):MapStatePropsType => {
+let MapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -49,23 +49,23 @@ let MapStateToProps = (state:AppStateType):MapStatePropsType => {
     }
 }
 type MapStatePropsType = {
-    currentPage:number
-    pageSize:number
-    isFetching:boolean
-    totalUsersCount:number
-    users:Array<UserType>
+    currentPage: number
+    pageSize: number
+    isFetching: boolean
+    totalUsersCount: number
+    users: Array<UserType>
     followingInProgress: Array<number>
 }
 type MapDispatchPropsType = {
-    requestUsers:(currentPage:number, pageSize:number)=>void
-    follow: (userId:number) => void
-    unfollow: (userId:number) => void
+    requestUsers: (currentPage: number, pageSize: number) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
 }
 
 
 //Export
 export default compose<React.ComponentType>(
-    connect<MapStatePropsType,MapDispatchPropsType,never,AppStateType>(MapStateToProps,
-        { follow, unfollow,requestUsers }
+    connect<MapStatePropsType, MapDispatchPropsType, never, AppStateType>(MapStateToProps,
+        { follow, unfollow, requestUsers }
     )
 )(UsersContainer)

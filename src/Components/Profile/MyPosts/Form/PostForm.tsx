@@ -1,7 +1,7 @@
 //Imports
 import React from 'react'
 import { reduxForm, InjectedFormProps } from 'redux-form'
-import { Textarea, createField } from '../../Common/FormsControls/FormsControl'
+import { Textarea, createField } from '../../../Common/FormsControls/FormsControl'
 
 
 //PostForm Component

@@ -1,6 +1,6 @@
 //Imports
 import React from 'react';
-import s from './Post.module.css'
+import s from '../../Css/Post.module.css'
 import userImage from '../../../../assets/Images/user.jpg'
 
 //Post Component

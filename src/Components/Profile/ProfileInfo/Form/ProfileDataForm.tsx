@@ -1,9 +1,10 @@
 //Imports
 import React from 'react'
-import { createField, Input, Textarea } from '../../Common/FormsControls/FormsControl';
+import { createField, Input, Textarea } from '../../../Common/FormsControls/FormsControl';
 import { reduxForm, InjectedFormProps } from "redux-form"
-import style from "../../Common/FormsControls/FormsControl.module.css"
-import { ProfileType } from '../../../types/types';
+import style from "../../../Common/FormsControls/FormsControl.module.css"
+import { ProfileType } from '../../../../types/types';
+
 
 //ProfileDataForm
 const ProfileDataForm: React.FC<InjectedFormProps<ProfileType, PropsType> & PropsType> = ({ handleSubmit, profile, error, onMainPhotoSelected }) => {

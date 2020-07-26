@@ -4,7 +4,7 @@ import s from './Dialogs.module.css'
 import DialogsItem from "./DialogItem/DialogsItem"
 import Message from "./Message/Message"
 import { initialStateType } from '../../Redux/Reducers/dialogsReducer'
-import { AddMessageFormRedux } from './DialogForm'
+import { AddMessageFormRedux } from './Form/DialogForm'
 
 
 //Dialogs Component
@@ -42,4 +42,6 @@ export type DialogFormType = {
     newMessagesText: string
 }
 
+
+//Export
 export default Dialogs

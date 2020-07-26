@@ -1,8 +1,8 @@
 //Imports
 import React from 'react'
-import s from './MyPosts.module.css'
+import s from '../Css/MyPosts.module.css'
 import Post from './Posts/Post'
-import { ReduxPostForm, PostFormValuesType } from './PostForm'
+import { ReduxPostForm, PostFormValuesType } from './Form/PostForm'
 import { PostsType } from '../../../types/types'
 
 

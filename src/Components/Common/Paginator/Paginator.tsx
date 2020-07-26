@@ -5,7 +5,7 @@ import cn from "classnames"
 
 
 //Paginator Component
-let Paginator: React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage = 1, onPageChange, partSize = 10 }) => {
+let Paginator: React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage = 1, onPageChange = x => x, partSize = 10 }) => {
     //Total number of pages
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
     let pages: Array<number> = [];
@@ -23,6 +23,7 @@ let Paginator: React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage =
     return <div className={s.paginator} >
         {partNumber > 1 &&
             <button className={s.btn} onClick={() => { setPartNumber(partNumber - 1) }}>{"<<"}</button>}
+
         {pages
             .filter(p => p >= leftPartPageNumber && p <= rightPartPageNumber)
             .map(p => {
@@ -32,6 +33,7 @@ let Paginator: React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage =
                     key={p}
                     onClick={() => { onPageChange(p) }} >{p} </span>
             })}
+
         {partCount > partNumber &&
             <button className={s.btn} onClick={() => { setPartNumber(partNumber + 1) }}>{">>"}</button>}
     </div>
@@ -40,8 +42,8 @@ let Paginator: React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage =
 type PropsType = {
     totalItemsCount: number
     pageSize: number
-    currentPage: number
-    onPageChange: (pageNumber: number) => void
+    currentPage?: number
+    onPageChange?: (pageNumber: number) => void
     partSize?: number
 }
 

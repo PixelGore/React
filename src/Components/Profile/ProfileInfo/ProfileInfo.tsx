@@ -1,15 +1,15 @@
 //Imports
 import React, { useState, ChangeEvent } from 'react';
-import s from './ProfileInfo.module.css'
+import s from '../Css/ProfileInfo.module.css'
 import PreLoader from '../../Common/Preloader/Preloader';
 import userImage from '../../../assets/Images/user.jpg';
-import ProfileStatus from './ProfileStatus';
-import ProfileDataForm from './ProfileDataForm';
+import ProfileStatus from './Status/ProfileStatus';
+import ProfileDataForm from './Form/ProfileDataForm';
 import { ProfileType, ContactsType } from '../../../types/types';
 
 //Profileinfo Component
 const ProfileInfo: React.FC<PropsType> = ({ profile, status, isOwner, updateStatus, savePhoto, saveProfile }) => {
-
+    //Local State
     let [editMode, setEditMode] = useState(false)
     //Loading PreLoader if profile isn't recieved yet
     if (!profile) {

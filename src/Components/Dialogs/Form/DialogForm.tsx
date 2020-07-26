@@ -1,8 +1,8 @@
 //Imports
 import React from 'react'
 import { reduxForm, InjectedFormProps } from 'redux-form'
-import { Textarea, createField } from '../Common/FormsControls/FormsControl'
-import { DialogFormType } from './Dialogs'
+import { Textarea, createField } from '../../Common/FormsControls/FormsControl'
+import { DialogFormType } from '../Dialogs'
 
 //DialogForm
 const DialogForm: React.FC<InjectedFormProps<DialogFormType>> = (props) => {

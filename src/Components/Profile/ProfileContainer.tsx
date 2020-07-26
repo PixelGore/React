@@ -9,7 +9,7 @@ import { AppStateType } from '../../Redux/reduxStore';
 import { ProfileType } from '../../types/types';
 
 
-
+//ProfileContainer
 class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {

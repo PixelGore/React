@@ -1,22 +1,20 @@
+//Imports
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import s from './ProfileStatus.module.css'
+import s from '../../Css/ProfileStatus.module.css'
 
 
-type PropsType = {
-    status: string
-    updateStatus: (newStatus: string) => void
-}
+//ProfileStatus Component
 const ProfileStatus: React.FC<PropsType> = (props) => {
-
+    //Local state
     let [editMode, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.status)
-
+    //Did update
     useEffect(() => {
         setStatus(props.status);
     }, [props.status]);
 
     const toggleEditMode = () => {
-        if (editMode === false) {
+        if (!editMode) {
             setEditMode(true)
         } else {
             setEditMode(false)
@@ -44,5 +42,10 @@ const ProfileStatus: React.FC<PropsType> = (props) => {
     )
 
 }
+type PropsType = {
+    status: string
+    updateStatus: (newStatus: string) => void
+}
 
+//Export
 export default ProfileStatus;

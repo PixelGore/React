@@ -8,13 +8,15 @@ import { InferActionstypes, BaseThunkType } from "../reduxStore";
 //Actions
 export const actions = {
     addPostAC: (newPostText: string) =>
-        ({ type: 'profilePage/addPost', newPostText } as const),
+        ({ type: 'profilePage/ADD_POST', newPostText } as const),
     setUserProfileAC: (profile: ProfileType) =>
         ({ type: 'profilePage/SET_USER_PROFILE', profile } as const),
     setStatusAC: (status: string) =>
         ({ type: 'profilePage/SET_STATUS', status } as const),
     savePhotoAC: (photos: PhotosType) =>
         ({ type: 'profilePage/SAVE_PHOTO', photos } as const),
+    deletePostAC: (postId: number) =>
+        ({ type: 'profilePage/DELETE_POST', postId } as const),
 
 }
 type ActionsTypes = InferActionstypes<typeof actions>
@@ -26,7 +28,6 @@ let initialState = {
         { id: 1, message: "Hi , ur mom gay !", upvotes: 69, downvotes: 99 },
         { id: 2, message: "No , u !", upvotes: 420, downvotes: 23 },
     ] as Array<PostsType>,
-    newPostText: '',
     profile: null as ProfileType | null,
     status: "",
 }
@@ -36,7 +37,7 @@ type InitialStateType = typeof initialState
 //Reducer
 const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case 'profilePage/addPost': {
+        case 'profilePage/ADD_POST': {
             let newPost = {
                 id: 5,
                 message: action.newPostText,
@@ -57,6 +58,8 @@ const profileReducer = (state = initialState, action: ActionsTypes): InitialStat
         case 'profilePage/SAVE_PHOTO': {
             return { ...state, profile: { ...state.profile, photos: action.photos } as ProfileType }
         }
+        case 'profilePage/DELETE_POST':
+            return { ...state, posts: state.posts.filter(p => p.id !== action.postId) }
         default:
             return state
     }
@@ -65,42 +68,42 @@ const profileReducer = (state = initialState, action: ActionsTypes): InitialStat
 
 
 //Thunks
-type ThunkType = BaseThunkType<ActionsTypes|FormAction>
+type ThunkType = BaseThunkType<ActionsTypes | FormAction>
 //Status
-export const getStatus = (userId: number):ThunkType => async (dispatch) => {
+export const getStatus = (userId: number): ThunkType => async (dispatch) => {
     const data = await profileAPI.getStatus(userId);
     dispatch(actions.setStatusAC(data))
 }
 
-export const updateStatus = (status: string):ThunkType => async (dispatch) => {
+export const updateStatus = (status: string): ThunkType => async (dispatch) => {
     const data = await profileAPI.updateStatus(status)
     if (data.resultCode === 0) {
         dispatch(actions.setStatusAC(status))
     }
 }
 //Photo
-export const savePhoto = (file: File):ThunkType => async (dispatch) => {
+export const savePhoto = (file: File): ThunkType => async (dispatch) => {
     const data = await profileAPI.savePhoto(file)
     if (data.resultCode === 0) {
         dispatch(actions.savePhotoAC(data.data.photos))
     }
 }
 //Profile
-export const getUserProfile = (userId: number):ThunkType => async (dispatch) => {
+export const getUserProfile = (userId: number): ThunkType => async (dispatch) => {
     const data = await profileAPI.getProfile(userId)
     dispatch(actions.setUserProfileAC(data))
 }
 
-export const saveProfile = (profile: ProfileType):ThunkType => async (dispatch, getstate) => {
+export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch, getstate) => {
     const userId = getstate().auth.userId
     const data = await profileAPI.saveProfile(profile)
     if (data.resultCode === 0) {
-        if(userId != null) {
+        if (userId != null) {
             dispatch(getUserProfile(userId))
-        }else {
+        } else {
             throw new Error("userId can't be null")
         }
-        
+
     } else {
         dispatch(stopSubmit("editProfile", { _error: data.messages[0] }))
         return Promise.reject(data.messages[0])
