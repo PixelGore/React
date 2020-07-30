@@ -1,30 +1,61 @@
-.userPhoto img {
-  width : 10em;
-  border-radius: 50px;
-}
-.paginator {
- margin-left: 30%;
-}
-.user {
-  margin: 5%;
-}
-.users {
+/* ||  The main bloc*/
+.usersBlock {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-@media (max-width: 850px) {
+/* || Paginator */
+.paginator {
+  justify-self: center;
+}
+
+/* ||  Users styles*/
+.users {
+  padding: 5px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-self: center;
+  column-gap: 3em;
+}
+
+/* || User styles */
+.user {
+  padding: 5px;
+  display: grid;
+  justify-items: center;
+}
+
+.userPhoto img {
+  width: 10em;
+  border-radius: 50px;
+}
+
+.user .follow {
+  position: relative;
+  left: 30%;
+  width: fit-content;
+}
+
+.user .name {
+  font-size: 1.3em;
+}
+
+
+
+/* ||  SearchForm*/
+.usersBlock .searchForm {
+  justify-self: center;
+
+}
+
+/* || Media queries */
+@media (max-width:750px) {
   .users {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
-@media (max-width: 600px) {
-  .paginator{
-    margin: 0px;
-  }
+@media (max-width:400px) {
   .users {
-    display: block;
-    margin-left: 15%;
+    grid-template-columns: 1fr;
   }
 }

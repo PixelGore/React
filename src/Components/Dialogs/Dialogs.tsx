@@ -11,7 +11,7 @@ import { AddMessageFormRedux } from './Form/DialogForm'
 const Dialogs: React.FC<IPropsType> = (props) => {
 
     let addNewMessage = (values: DialogFormType) => {
-        props.sendMessage(values.newMessagesText)
+        props.sendMessageAC(values.newMessagesText)
         values.newMessagesText = ""
     }
 
@@ -36,7 +36,7 @@ const Dialogs: React.FC<IPropsType> = (props) => {
 }
 type IPropsType = {
     messagesPage: initialStateType
-    sendMessage: (messageText: string) => void
+    sendMessageAC: (messageText: string) => void
 }
 export type DialogFormType = {
     newMessagesText: string

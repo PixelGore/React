@@ -36,11 +36,7 @@
 }
 
 @media (max-width:750px) {
-  .welcome {
-    font-size: 1.3em;
-  }
-
-  .loginBlock {
+  .welcome , .loginBlock {
     font-size: 1.3em;
   }
 }
