@@ -25,8 +25,8 @@ type ActionsTypes = InferActionstypes<typeof actions>
 //Initial State
 let initialState = {
     posts: [
-        { id: 1, message: "Hi , ur mom gay !", upvotes: 69, downvotes: 99 },
-        { id: 2, message: "No , u !", upvotes: 420, downvotes: 23 },
+        { id: 1, message: "Hello World", upvotes: 69, downvotes: 99 },
+        { id: 2, message: "Example", upvotes: 420, downvotes: 23 },
     ] as Array<PostsType>,
     profile: null as ProfileType | null,
     status: "",
