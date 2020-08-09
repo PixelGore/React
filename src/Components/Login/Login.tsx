@@ -1,6 +1,6 @@
 //Imports
 import React from 'react'
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../Redux/Reducers/authReducer'
 import { AppStateType } from '../../Redux/reduxStore';
@@ -8,35 +8,23 @@ import { LoginFormType, LoginReduxForm } from './LoginForm';
 
 
 //Login Component
-const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
+export const LoginPage: React.FC = (props) => {
+
+    const dispatch = useDispatch()
+
+    const captchaUrl = useSelector((state: AppStateType) => state.auth.captchaUrl)
+    const isAuth = useSelector((state: AppStateType) => state.auth.isAuth)
+
     const onSubmit = (FormData: LoginFormType) => {
-        props.login(FormData.email, FormData.password, FormData.rememberMe, FormData.captcha)
+        dispatch(login(FormData.email, FormData.password, FormData.rememberMe, FormData.captcha))
     }
 
-    if (props.isAuth) {
-        return <Redirect to={"/profile"} />
+    if (isAuth) {
+        return <Redirect to={"/Profile"} />
     }
+
     return <div>
         <h1>Login</h1>
-        <LoginReduxForm onSubmit={onSubmit} captchaUrl={props.captchaUrl} />
+        <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
     </div>
 }
-
-
-//MapStateToPops
-const MapStateToPops = (state: AppStateType): MapStatePropsType => ({
-    isAuth: state.auth.isAuth,
-    captchaUrl: state.auth.captchaUrl
-})
-//MSTP & MDTP Types
-type MapStatePropsType = {
-    isAuth: boolean
-    captchaUrl: string | null
-}
-type MapDispatchPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string) => void
-}
-
-
-//Export
-export default connect(MapStateToPops, { login })(Login);

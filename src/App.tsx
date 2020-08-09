@@ -1,9 +1,9 @@
 //Imports
 import React, { Suspense } from 'react'
 import './App.css'
+import { UsersPage } from './Components/Users/UsersContainer'
+import { LoginPage } from './Components/Login/Login'
 import NavBar from './Components/Navbar/Navbar'
-import UsersContainer from './Components/Users/UsersContainer'
-import Login from './Components/Login/Login'
 import { Route, withRouter, Switch, Redirect, BrowserRouter } from 'react-router-dom'
 import HeaderContainer from './Components/Header/HeaderContainer'
 import { connect, Provider } from 'react-redux'
@@ -51,9 +51,9 @@ class App extends React.Component<MapStatePropsType & MapDispatchPropsType> {
 
             <Route path='/Profile/:userId?' render={() => <Suspense fallback={<div>Loading...</div>}> <ProfileContainer /></Suspense>} />
 
-            <Route path='/Users' render={() => <UsersContainer />} />
+            <Route path='/Users' render={() => <UsersPage />} />
 
-            <Route path='/Login' render={() => <Login />} />
+            <Route path='/Login' render={() => <LoginPage />} />
 
             <Redirect from="/" to="/Profile" />
 

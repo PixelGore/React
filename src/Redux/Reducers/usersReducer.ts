@@ -22,7 +22,7 @@ export const actions = {
         ({ type: 'usersPage/SET_TOTAL_COUNT', count: totalUsersCount } as const),
     toggleIsFetchingAC: (isFetching: boolean) =>
         ({ type: 'usersPage/TOGGLE_IS_FETCHING', isFetching } as const),
-    toggleFollowingProgressAC: (isFetching: boolean, userId: number) =>
+    toggleFollowingInProgressAC: (isFetching: boolean, userId: number) =>
         ({ type: 'usersPage/Toggle_Is_FOLLOWING', isFetching, userId } as const),
 }
 
@@ -101,10 +101,10 @@ export const requestUsers = (page: number, pageSize: number, filter: FilterType)
 
 const _toggleFollowUnfollow = async (dispatch: DispatchType, userId: number, apiMethod: (userId: number) => Promise<APIResponseType>, actionCreator:
     (userId: number) => ActionsTypes) => {
-    dispatch(actions.toggleFollowingProgressAC(true, userId))
+    dispatch(actions.toggleFollowingInProgressAC(true, userId))
     let response = await apiMethod(userId)
     if (response.resultCode === 0) { dispatch(actionCreator(userId)) }
-    dispatch(actions.toggleFollowingProgressAC(false, userId))
+    dispatch(actions.toggleFollowingInProgressAC(false, userId))
 }
 
 export const follow = (userId: number): ThunkType => {
