@@ -22,7 +22,7 @@ let Paginator: React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage =
     //The markup 
     return <div className={s.paginator} >
         {partNumber > 1 &&
-            <button className={s.btn} onClick={() => { setPartNumber(partNumber - 1) }}>{"<<"}</button>}
+            <button className={s.btn} onClick={() => { setPartNumber(partNumber - 1) }}>&lArr;</button>}
 
         {pages
             .filter(p => p >= leftPartPageNumber && p <= rightPartPageNumber)
@@ -35,7 +35,7 @@ let Paginator: React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage =
             })}
 
         {partCount > partNumber &&
-            <button className={s.btn} onClick={() => { setPartNumber(partNumber + 1) }}>{">>"}</button>}
+            <button className={s.btn} onClick={() => { setPartNumber(partNumber + 1) }}>&rArr;</button>}
     </div>
 
 }

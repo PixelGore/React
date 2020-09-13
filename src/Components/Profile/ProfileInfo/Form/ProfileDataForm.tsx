@@ -43,8 +43,8 @@ type PropsType = {
 type ProfileTypeKeys = Extract<keyof ProfileType, string>
 
 //Adding reduxForm to ProfileDataForm
-const ProfileDataFormReduxForm = reduxForm<ProfileType, PropsType>({ form: 'editProfile' })(ProfileDataForm)
+const ProfileDataReduxForm = reduxForm<ProfileType, PropsType>({ form: 'editProfile' })(ProfileDataForm)
 
 
 //Export
-export default ProfileDataFormReduxForm;
+export default ProfileDataReduxForm;

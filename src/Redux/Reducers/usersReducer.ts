@@ -18,8 +18,8 @@ export const actions = {
         ({ type: 'usersPage/SET_CURRENT_PAGE', currentPage: currentPage } as const),
     setFilterAC: (filter: FilterType) =>
         ({ type: 'usersPage/SET_FILTER', payload: filter } as const),
-    setTotalUsersCountAC: (totalUsersCount: number) =>
-        ({ type: 'usersPage/SET_TOTAL_COUNT', count: totalUsersCount } as const),
+    setUsersCountAC: (usersCount: number) =>
+        ({ type: 'usersPage/SET_TOTAL_COUNT', count: usersCount } as const),
     toggleIsFetchingAC: (isFetching: boolean) =>
         ({ type: 'usersPage/TOGGLE_IS_FETCHING', isFetching } as const),
     toggleFollowingInProgressAC: (isFetching: boolean, userId: number) =>
@@ -32,7 +32,7 @@ type ActionsTypes = InferActionstypes<typeof actions>
 let initialState = {
     users: [] as Array<UserType>,
     pageSize: 12,
-    totalUsersCount: 0,
+    usersCount: 0,
     currentPage: 1,
     filter: {
         term: '',
@@ -65,7 +65,7 @@ const UsersReducer = (state = initialState, action: ActionsTypes): InitialStateT
         case "usersPage/SET_FILTER":
             return { ...state, filter: action.payload }
         case "usersPage/SET_TOTAL_COUNT":
-            return { ...state, totalUsersCount: action.count }
+            return { ...state, usersCount: action.count }
         case "usersPage/TOGGLE_IS_FETCHING":
             return { ...state, isFetching: action.isFetching }
         case "usersPage/Toggle_Is_FOLLOWING":
@@ -94,7 +94,7 @@ export const requestUsers = (page: number, pageSize: number, filter: FilterType)
         let data = await userAPI.getUsers(page, pageSize, filter.term, filter.friend)
         dispatch(actions.toggleIsFetchingAC(false))
         dispatch(actions.setUsersAC(data.items))
-        dispatch(actions.setTotalUsersCountAC(data.totalCount))
+        dispatch(actions.setUsersCountAC(data.totalCount))
     }
 }
 
