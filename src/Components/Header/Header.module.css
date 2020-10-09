@@ -1,52 +1,69 @@
 .header {
-  grid-area: h;
-  background-color: rgb(34, 31, 31);
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;
+    grid-area: h;
+    background-color: #101010;
+    height: 80px;
+    overflow: hidden;
 }
-
-.logo img {
-  height: 3.5em;
-  justify-self: left;
-}
-
-.welcome {
-  justify-self: center;
-  font-size: 2em;
-  font-family: 'Pathway Gothic One', sans-serif;
-  text-shadow: 2px 2px darkred;
+.inner_header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    width: 1000px;
+    margin: 0 auto;
 }
 
 .loginBlock {
-  justify-self: right;
-  font-size: 1.5em;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  text-shadow: 1px 1px black;
-}
-
-.loginBlock button {
-  border-radius: 12px;
-  background-color: black;
-  color: white;
-  border: 1px solid gray;
-  margin: 5px;
-  cursor: pointer;
-}
-
-@media (max-width:750px) {
-  .welcome , .loginBlock {
-    font-size: 1.3em;
-  }
-}
-
-@media (max-width: 500px) {
-  .loginBlock {
     font-size: 1.5em;
-  }
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+}
+.loginBlock span {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.loginBlock span:hover,
+.loginBlock span:focus {
+    color: #333;
+    text-decoration: none;
+}
 
-  .welcome {
-    display: none;
-  }
+.logo_container h1 {
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 200;
+}
+
+.logo_container h1 span {
+    font-weight: 800;
+}
+
+@media only screen and (max-width: 1000px){
+    .inner_header{
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .loginBlock{
+        font-size: 1em;
+    }
+}
+@media only screen and (max-width: 400) {
+    .logo_container h1 {
+        font-weight: 100;
+    }
+    .logo_container h1 span {
+        font-weight: 400;
+    }
 }

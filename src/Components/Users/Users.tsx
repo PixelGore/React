@@ -64,10 +64,10 @@ export const Users: React.FC = (props) => {
                 break
             case 'true':
                 actualFilter = { ...actualFilter, friend: true }
+                break
             case 'false':
                 actualFilter = { ...actualFilter, friend: false }
-
-
+                break
         }
 
         dispatch(requestUsers(actualPage, pageSize, actualFilter))
