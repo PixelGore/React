@@ -1,6 +1,5 @@
 //Imports
 import React, { useState } from 'react';
-import s from './Paginator.module.css';
 import cn from "classnames"
 
 
@@ -20,24 +19,33 @@ let Paginator: React.FC<PropsType> = ({ totalItemsCount, pageSize, currentPage =
     let rightPartPageNumber = partNumber * partSize
 
     //The markup 
-    return <div className={s.paginator} >
-        {partNumber > 1 &&
-            <button className={s.btn} onClick={() => { setPartNumber(partNumber - 1) }}>&lArr;</button>}
+    return (
+        <div className="pagination justify-content-center p-4" >
+            {partNumber > 1 &&
+                <li className="page-item">
+                    <a className="page-link" aria-label="Previous" onClick={() => { setPartNumber(partNumber - 1) }}>
+                        <span aria-hidden="true">&laquo;</span>
+                        <span className="sr-only">Previous</span>
+                    </a>
+                </li>}
 
-        {pages
-            .filter(p => p >= leftPartPageNumber && p <= rightPartPageNumber)
-            .map(p => {
-                return <span className={cn({
-                    [s.selectedPage]: currentPage === p
-                }, s.pageNumber)}
-                    key={p}
-                    onClick={() => { onPageChange(p) }} >{p} </span>
-            })}
-
-        {partCount > partNumber &&
-            <button className={s.btn} onClick={() => { setPartNumber(partNumber + 1) }}>&rArr;</button>}
-    </div>
-
+            {pages
+                .filter(p => p >= leftPartPageNumber && p <= rightPartPageNumber)
+                .map(p => {
+                    return <li className={cn({ "active": currentPage === p }, "page-item")}
+                        key={p} onClick={() => { onPageChange(p) }} >
+                        <a className="page-link">{p}</a>
+                    </li>
+                })}
+                
+            {partCount > partNumber &&
+                <li className="page-item">
+                    <a className="page-link" aria-label="Next" onClick={() => { setPartNumber(partNumber + 1) }}>
+                        <span aria-hidden="true">&raquo;</span>
+                        <span className="sr-only">Next</span>
+                    </a>
+                </li>}
+        </div>)
 }
 type PropsType = {
     totalItemsCount: number

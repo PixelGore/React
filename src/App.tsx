@@ -45,7 +45,7 @@ class App extends React.Component<MapStatePropsType & MapDispatchPropsType> {
       <div className='app-wrapper'>
         <HeaderContainer />
         <NavBar />
-        <div className="app-wrapper-content">
+        <div className="app-wrapper-content bg-secondary">
           <Switch>
             <Route path='/Dialogs' render={() => <Suspense fallback={<PreLoader />}>  <DialogsContainer /></Suspense>} />
 

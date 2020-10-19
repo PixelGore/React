@@ -29,14 +29,14 @@ export const UserSearchForm: React.FC<PropsType> = React.memo((props) => {
                 onSubmit={submit}>
 
                 {({ isSubmitting }) => (
-                    <Form>
-                        <Field type="text" name="term" placeholder="Type here to search users..." />
+                    <Form className="form-inline justify-content-center">
                         <Field name="friend" as="select">
-                            <option value="null">All</option>
-                            <option value="true">Only followed</option>
-                            <option value="false">Only unfollowed</option>
+                            <option className="dropdown-item" value="null">All</option>
+                            <option className="dropdown-item" value="true">Only followed</option>
+                            <option className="dropdown-item" value="false">Only unfollowed</option>
                         </Field>
-                        <button type="submit" disabled={isSubmitting}>Search</button>
+                        <Field className="form-control" type="text" name="term" placeholder="Search" />
+                        <button className="btn" type="submit" disabled={isSubmitting}><i className="fas fa-search" aria-hidden="true"></i></button>
                     </Form>
                 )}
             </Formik>

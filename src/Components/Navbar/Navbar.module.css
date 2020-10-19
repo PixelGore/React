@@ -1,8 +1,10 @@
 .nav {
   grid-area: n;
-  background-color: rgb(73, 65, 65);
 }
 
+ul {
+  list-style-type: none;
+}
 .item {
   color: white;
   padding: 10px;
