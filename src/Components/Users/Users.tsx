@@ -93,21 +93,15 @@ export const Users: React.FC = (props) => {
 
 
     //Markup
-    return (
-        <div className="bg-secondary">
-            <div className='container'>
-                <div className='text-center p-5'>
-                    <UserSearchForm onFilterChange={onFilterChange} />
-                </div>
-                <div className='row'>{users.map(u =>
-                    <div className="col-3">
-                        <User user={u} key={u.id} followingInProgress={followingInProgress} follow={followUser} unfollow={unfollowUser} />
-                    </div>
-                )}
-                </div>
-                <Paginator currentPage={currentPage} totalItemsCount={totalUsersCount} onPageChange={onPageChange} pageSize={pageSize} />
-            </div>
+    return <div className={s.usersBlock} >
+        <div className={s.searchForm}>
+            <UserSearchForm onFilterChange={onFilterChange} />
         </div>
-
-    )
+        <div className={s.users}>{users.map(u =>
+            <User user={u} key={u.id} followingInProgress={followingInProgress} follow={followUser} unfollow={unfollowUser} />)}
+        </div>
+        <div className={s.paginator}>
+            <Paginator currentPage={currentPage} totalItemsCount={totalUsersCount} onPageChange={onPageChange} pageSize={pageSize} />
+        </div>
+    </div>
 }
