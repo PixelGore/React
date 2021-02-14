@@ -1,6 +1,5 @@
 //Imports
 import React from 'react';
-import s from './Header.module.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuth, selectCurrentUserLogin } from '../../Redux/Selectors/authSelector'

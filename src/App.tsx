@@ -1,10 +1,9 @@
 //Imports
-import React, { Suspense } from 'react'
+import React from 'react'
 import './App.css'
 import 'antd/dist/antd.css'
 import { UsersPage } from './Components/Users/UsersContainer'
 import { LoginPage } from './Components/Login/Login'
-import NavBar from './Components/Navbar/Navbar'
 import { Route, withRouter, Switch, Redirect, BrowserRouter, Link } from 'react-router-dom'
 import { Header } from './Components/Header/Header'
 import { connect, Provider } from 'react-redux'
@@ -13,17 +12,23 @@ import { initializeApp } from './Redux/Reducers/appReducer'
 import PreLoader from './Components/Common/Preloader/Preloader'
 import { AppStateType } from './Redux/reduxStore'
 import store from './Redux/reduxStore'
+
+
 //Ant Design
-import { Layout, Menu, Breadcrumb, Row, Col } from 'antd';
+import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import Avatar from 'antd/lib/avatar/avatar'
+import { withSuspense } from './HOC/withSuspense'
 const { SubMenu } = Menu;
 const { Content, Footer, Sider } = Layout;
-
 
 //React.lazy
 const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
+const ChatPage = React.lazy(() => import('./pages/Chat/ChatPage'));
+
+const SuspendedDialogs = withSuspense(DialogsContainer)
+const SuspendedProfile = withSuspense(ProfileContainer)
+const SuspendedChatPage = withSuspense(ChatPage)
 
 
 //App Component
@@ -78,56 +83,34 @@ class App extends React.Component<MapStatePropsType & MapDispatchPropsType> {
                   <Menu.Item key="8">option8</Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-                  <Menu.Item key="9">option9</Menu.Item>
+                  <Menu.Item key="9"><Link to="/chat">Chat</Link></Menu.Item>
                   <Menu.Item key="10">option10</Menu.Item>
                   <Menu.Item key="11">option11</Menu.Item>
                   <Menu.Item key="12">option12</Menu.Item>
                 </SubMenu>
               </Menu>
             </Sider>
+
             <Content style={{ padding: '0 24px', minHeight: 280 }}>
               <Switch>
-                <Route path='/profile/:userId?' render={() => <Suspense fallback={<div>Loading...</div>}> <ProfileContainer /></Suspense>} />
-
-                <Route path='/dialogs' render={() => <Suspense fallback={<PreLoader />}>  <DialogsContainer /></Suspense>} />
-
+                <Route path='/profile/:userId?' render={() => <SuspendedProfile />} />
+                <Route path='/dialogs' render={() => <SuspendedDialogs />} />
+                <Route path='/chat' render={() => <SuspendedChatPage />} />
                 <Route path='/developers' render={() => <UsersPage />} />
-
                 <Route path='/login' render={() => <LoginPage />} />
-
-                <Redirect from="/" to="/Profile" />
-
+                <Redirect from="/" to="/profile" />
                 <Route path='*' render={() => <div>404 Not Found</div>} />
               </Switch>
             </Content>
+
           </Layout>
         </Content>
         <Footer style={{ textAlign: 'center' }}>ReactJs ©2020 Created by Gary</Footer>
       </Layout>
-      // <div className='app-wrapper'>
-      //   <HeaderContainer />
-      //   <NavBar />
-      //   <div className="app-wrapper-content bg-secondary">
-      //     <Switch>
-      //       <Route path='/Dialogs' render={() => <Suspense fallback={<PreLoader />}>  <DialogsContainer /></Suspense>} />
-
-      //       <Route path='/Profile/:userId?' render={() => <Suspense fallback={<div>Loading...</div>}> <ProfileContainer /></Suspense>} />
-
-      //       <Route path='/Users' render={() => <UsersPage />} />
-
-      //       <Route path='/Login' render={() => <LoginPage />} />
-
-      //       <Redirect from="/" to="/Profile" />
-
-      //       <Route path='*' render={() => <div>404 Not Found</div>} />
-      //     </Switch>
-      //   </div>
-      // </div>
     );
   }
 
 }
-
 
 //MSTP
 const MapStateToProps = (state: AppStateType) => ({
