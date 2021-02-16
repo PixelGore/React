@@ -49,8 +49,8 @@
     ]
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.10",
-    "react-test-renderer": "^16.13.1",
-    "@types/react-test-renderer": "^16.9.2"
+    "@types/classnames": "^2.2.11",
+    "@types/react-test-renderer": "^16.9.2",
+    "react-test-renderer": "^16.13.1"
   }
 }
