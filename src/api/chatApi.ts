@@ -1,25 +1,49 @@
-let subscribers = [] as SubscriberType[];
+const subscribers = {
+  "recieved-message": [] as RecievedMessagesSubscriberType[],
+  "changed-status": [] as ChangedStatusSubscriberType[],
+};
 let ws: WebSocket | null = null;
+type eventNameType = "recieved-message" | "changed-status";
 
 const closeHandler = () => {
-  console.log("Close ws");
+  NotifySubscribers_Stauts("pending");
   setTimeout(createChanel, 3000);
 };
 const messageHandler = (e: MessageEvent) => {
   const newMessages = JSON.parse(e.data);
-  subscribers.forEach((s) => s(newMessages));
+  subscribers["recieved-message"].forEach((s) => s(newMessages));
+};
+const openHandler = () => {
+  NotifySubscribers_Stauts("ready");
+};
+const errorHandler = () => {
+  NotifySubscribers_Stauts("error");
+  console.error("Some Error occured , please refresh the page");
+};
+
+const cleanUp = () => {
+  ws?.removeEventListener("close", createChanel);
+  ws?.removeEventListener("message", messageHandler);
+  ws?.removeEventListener("open", openHandler);
+  ws?.removeEventListener("error", errorHandler);
+};
+
+const NotifySubscribers_Stauts = (status: StatusType) => {
+  subscribers["changed-status"].forEach((s) => s(status));
 };
 
 function createChanel() {
-  ws?.removeEventListener("close", createChanel);
+  cleanUp();
   ws?.close();
 
   ws = new WebSocket(
     "wss://social-network.samuraijs.com/handlers/ChatHandler.ashx"
   );
-
+  NotifySubscribers_Stauts("pending");
   ws?.addEventListener("close", closeHandler);
   ws?.addEventListener("message", messageHandler);
+  ws?.addEventListener("open", openHandler);
+  ws?.addEventListener("error", errorHandler);
 }
 
 export const chatApi = {
@@ -27,30 +51,42 @@ export const chatApi = {
     createChanel();
   },
   stop() {
-    subscribers = [];
-    ws?.removeEventListener("close", closeHandler);
-    ws?.removeEventListener("message", messageHandler);
+    subscribers["recieved-message"] = [];
+    subscribers["changed-status"] = [];
+    cleanUp();
     ws?.close();
   },
-  subscribe(callback: SubscriberType) {
-    subscribers.push(callback);
+  subscribe(
+    eventName: eventNameType,
+    callback: RecievedMessagesSubscriberType | ChangedStatusSubscriberType
+  ) {
+    // @ts-ignore
+    subscribers[eventName].push(callback);
     return () => {
-      subscribers = subscribers.filter((s) => s !== callback);
+      // @ts-ignore
+      subscribers[eventName] = subscribers[eventName].filter((s) => s !== callback);
     };
   },
 
-  unsubscribe(callback: SubscriberType) {
-    subscribers = subscribers.filter((s) => s !== callback);
+  unsubscribe(
+    eventName: eventNameType,
+    callback: RecievedMessagesSubscriberType | ChangedStatusSubscriberType
+  ) {
+    // @ts-ignore
+    subscribers[eventName] = subscribers[eventName].filter((s) => s !== callback);
   },
   sendMessage(message: string) {
     ws?.send(message);
   },
 };
-type SubscriberType = (messages: ChatMessageType[]) => void;
+type RecievedMessagesSubscriberType = (messages: ChatMessageAPIType[]) => void;
+type ChangedStatusSubscriberType = (status: StatusType) => void;
 
-export type ChatMessageType = {
+export type ChatMessageAPIType = {
   message: string;
   photo: string;
   userId: number;
   userName: string;
 };
+
+export type StatusType = "pending" | "ready" | "error";
